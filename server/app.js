@@ -22,3 +22,26 @@ app.use(hpp());
 
 //Body Parser Implement
 app.use(bodyParser.json());
+
+//Request Rate Limit
+const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 3000 });
+app.use(limiter);
+
+//Mongo DB Database Connection
+let URI =
+  "mongodb+srv://bappyDemo:2yQPDSTZAKkAxmuO@cluster0.vzkbd.mongodb.net/TaskManager";
+let OPTION = { autoIndex: true };
+mongoose.connect(URI, OPTION, (error) => {
+  console.log("Connection Successs");
+  console.log(error);
+});
+
+//Routing Implement
+app.use("/api/v1", router);
+
+//Undefined Route Implement
+app.use("*", (req, res) => {
+  res.status(404).json({ status: "Fail", data: "Not Found!" });
+});
+
+module.exports = app;
