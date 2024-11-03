@@ -21,5 +21,10 @@ router.get(
   TasksController.updateTaskStatus
 );
 router.get("/deleteTask/:id", AuthVerifyMiddleware, TasksController.deleteTask);
+router.get(
+  "/listTaskByStatus/:status",
+  AuthVerifyMiddleware,
+  TasksController.listTaskByStatus
+);
 
 module.exports = router;
