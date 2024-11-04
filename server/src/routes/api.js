@@ -26,5 +26,10 @@ router.get(
   AuthVerifyMiddleware,
   TasksController.listTaskByStatus
 );
+router.get(
+  "/taskStatusCount",
+  AuthVerifyMiddleware,
+  TasksController.taskStatusCount
+);
 
 module.exports = router;
